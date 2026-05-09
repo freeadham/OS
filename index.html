@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPU Scheduling Simulator</title>
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>CPU Scheduling Simulator</h1>
+            <h2>Priority Scheduling vs SRTF Comparison</h2>
+        </header>
+
+        <section class="card" id="input-section">
+            <h3 class="card-title">Process Input</h3>
+            <div class="controls">
+                <button id="add-btn">+ Add</button>
+                <button id="remove-btn" class="danger">− Remove</button>
+                <button id="run-btn" style="margin-left: auto;">Run</button>
+                <button id="clear-btn" class="secondary">Clear</button>
+            </div>
+
+            <div id="validation-error" class="error-message"></div>
+
+            <table class="input-table" id="process-table">
+                <thead>
+                    <tr>
+                        <th>PID</th>
+                        <th>Arrival</th>
+                        <th>Burst</th>
+                        <th>Priority</th>
+                    </tr>
+                </thead>
+                <tbody id="process-tbody">
+                </tbody>
+            </table>
+        </section>
+
+        <section id="results-section">
+            <div class="card">
+                <h3 class="card-title">Priority Scheduling (Preemptive)</h3>
+                <h4>Gantt Chart</h4>
+                <div class="gantt-wrapper">
+                    <div class="gantt-chart" id="gantt-prio"></div>
+                    <div class="gantt-times" id="times-prio"></div>
+                </div>
+                <h4>Results</h4>
+                <div style="overflow-x: auto;">
+                    <table id="results-table-prio">
+                        <thead>
+                            <tr>
+                                <th>PID</th>
+                                <th>Arrival</th>
+                                <th>Burst</th>
+                                <th>Priority</th>
+                                <th>Start</th>
+                                <th>End</th>
+                                <th>WT</th>
+                                <th>TAT</th>
+                                <th>RT</th>
+                            </tr>
+                            <tr class="formula-row">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="formula">Completion</td>
+                                <td class="formula">TAT − Burst</td>
+                                <td class="formula">End − Arrival</td>
+                                <td class="formula">Start − Arrival</td>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot></tfoot>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">Shortest Remaining Time First (SRTF)</h3>
+                <h4>Gantt Chart</h4>
+                <div class="gantt-wrapper">
+                    <div class="gantt-chart" id="gantt-srtf"></div>
+                    <div class="gantt-times" id="times-srtf"></div>
+                </div>
+                <h4>Results</h4>
+                <div style="overflow-x: auto;">
+                    <table id="results-table-srtf">
+                        <thead>
+                            <tr>
+                                <th>PID</th>
+                                <th>Arrival</th>
+                                <th>Burst</th>
+                                <th>Priority</th>
+                                <th>Start</th>
+                                <th>End</th>
+                                <th>WT</th>
+                                <th>TAT</th>
+                                <th>RT</th>
+                            </tr>
+                            <tr class="formula-row">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="formula">Completion</td>
+                                <td class="formula">TAT − Burst</td>
+                                <td class="formula">End − Arrival</td>
+                                <td class="formula">Start − Arrival</td>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot></tfoot>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card comparison-grid">
+                <div>
+                    <h3 class="card-title">Comparison</h3>
+                    <div style="display: flex; justify-content: flex-end; gap: 16px; font-size: 0.75rem; color: var(--text-muted); margin-bottom: 8px;">
+                        <span style="width: 56px; text-align: right;">Priority</span>
+                        <span style="width: 56px; text-align: right;">SRTF</span>
+                    </div>
+                    <div id="comparison-metrics"></div>
+                    <h4 style="margin-top: 16px;">Observations</h4>
+                    <div id="fairness-starvation" style="font-size: 0.82rem;"></div>
+                </div>
+                <div>
+                    <h3 class="card-title">Analysis</h3>
+                    <div id="analysis-text"></div>
+                    <div class="conclusion" id="final-conclusion"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="src/model/model.js"></script>
+    <script src="src/scheduler/scheduler.js"></script>
+    <script src="src/metrics/metrics.js"></script>
+    <script src="src/util/util.js"></script>
+</body>
+
+</html>
