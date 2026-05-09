@@ -250,7 +250,4 @@ input[type="number"].invalid {
     margin-top: 12px;
 }
 
-#results-table-srtf th:nth-child(4),
-#results-table-srtf td:nth-child(4) { display: none; }
-
 #results-section { display: none; }
