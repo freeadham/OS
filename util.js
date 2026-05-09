@@ -145,7 +145,7 @@ function renderGantt(gantt, totalTime, chartId, timesId, origProcesses) {
     });
 }
 
-function renderTable(procs, tableId) {
+function renderTable(procs, tableId, showPriority = true) {
     const tbody = document.querySelector(`#${tableId} tbody`);
     const tfoot = document.querySelector(`#${tableId} tfoot`);
     tbody.innerHTML = '';
@@ -157,7 +157,7 @@ function renderTable(procs, tableId) {
             <td><span style="display:inline-block; width:12px; height:12px; background:${p.color}; border-radius:50%; margin-right:8px;"></span>${p.pid}</td>
             <td>${p.arrival}</td>
             <td>${p.burst}</td>
-            <td>${p.priority}</td>
+            ${showPriority ? `<td>${p.priority}</td>` : ''}
             <td>${p.startTime}</td>
             <td>${p.completionTime}</td>
             <td>${p.wt}</td>
@@ -168,12 +168,13 @@ function renderTable(procs, tableId) {
     });
 
     const stats = calculateAverages(procs);
+    const colSpan = showPriority ? 6 : 5;
 
     const footTr = document.createElement('tr');
     footTr.style.fontWeight = 'bold';
     footTr.style.backgroundColor = 'rgba(255,255,255,0.05)';
     footTr.innerHTML = `
-        <td colspan="6" style="text-align: right;">Averages:</td>
+        <td colspan="${colSpan}" style="text-align: right;">Averages:</td>
         <td>${stats.avgWT.toFixed(2)}</td>
         <td>${stats.avgTAT.toFixed(2)}</td>
         <td>${stats.avgRT.toFixed(2)}</td>
@@ -235,8 +236,8 @@ function runSimulations(processes) {
     renderGantt(prioResult.gantt, prioResult.totalTime, 'gantt-prio', 'times-prio', processes);
     renderGantt(srtfResult.gantt, srtfResult.totalTime, 'gantt-srtf', 'times-srtf', processes);
 
-    const prioStats = renderTable(prioResult.procs, 'results-table-prio');
-    const srtfStats = renderTable(srtfResult.procs, 'results-table-srtf');
+    const prioStats = renderTable(prioResult.procs, 'results-table-prio', true);
+    const srtfStats = renderTable(srtfResult.procs, 'results-table-srtf', false);
 
     renderComparison(prioStats, srtfStats, prioResult.procs, srtfResult.procs);
 }
