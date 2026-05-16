@@ -1,5 +1,7 @@
 # CPU Scheduling Simulator
 
+[Website link](https://freeadham.github.io/OS/)
+
 A complete, self-contained, and interactive single-page web application to simulate and compare **Priority Scheduling (Preemptive)** and **Shortest Remaining Time First (SRTF)** CPU scheduling algorithms. 
 
 This project provides a robust visual interface to understand how different workloads affect process Wait Time, Turnaround Time, and Response Time.
